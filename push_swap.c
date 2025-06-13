@@ -1,15 +1,18 @@
 #include "push_swap.h"
 
-int	is_sorted(t_stack *stack_a)
+int	is_sorted(t_stack **stack)
 {
-	while (stack_a->next != NULL)
+	t_stack *tmp;
+
+	tmp = *stack;
+	while (tmp != NULL && tmp->next != NULL)
 	{
-		if (stack_a->value > stack_a->next->value)
+		if (tmp->index > tmp->next->index)
 		{
 			// Not sorted
 			return (0);
 		}
-		stack_a = stack_a->next;
+		tmp = tmp->next;
 		// Sorted
 	}
 	return (1);
@@ -23,15 +26,23 @@ int	is_sorted(t_stack *stack_a)
 	// if 3 values -> sort_three()
 	// if > 3 values -> sort_algorithm()
 	
-/* int push_swap(t_stack **stack_a, t_stack **stack_b, int stack_a_size)
+void push_swap(t_stack **stack_a, t_stack **stack_b, int stack_a_size)
 {
-	if (stack_a_size == 2 && !is_sorted(*stack_a))
+	printf("PUSH_SWAP\n");
+	printf("IS_SORTED: %i\n", is_sorted(stack_a));
+
+	if (stack_a_size == 2 && !is_sorted(stack_a))
 		sa(stack_a);
-	else if (stack_a_size == 3 && !is_sorted(*stack_a))
+	else if (stack_a_size == 3 && !is_sorted(stack_a))
 		sort_three(stack_a);
-	else if (stack_a_size > 3 && !is_sorted(*stack_a))
-		sort_algorithm(stack_a, stack_b);
-} */
+	else if (stack_a_size > 3 && !is_sorted(stack_a))
+	{
+		sort_three(stack_b);
+		//sort_algorithm(stack_a, stack_b);
+	}
+	else
+		return ;
+}
 
 
 /****** sort_algorithm() ********/
@@ -45,6 +56,10 @@ int	is_sorted(t_stack *stack_a)
 		// Execute the sequence of actions
 	// Rotate stack A if needed
 //}
+
+/* ____________________________________________________________________________
+
+*/
 
 void print_stack(t_stack *stack)
 {
@@ -63,6 +78,31 @@ void print_stack(t_stack *stack)
         current = current->next;        // Avanza al siguiente nodo
     }
 }
+
+void print_list(t_stack *head)
+{
+    t_stack *current = head;
+    printf("Lista de ejemplo:\n");
+    while (current != NULL)
+    {
+        printf("  [Value: %d]\n", current->value); // Solo imprimimos el value por simplicidad
+        current = current->next;
+    }
+}
+
+void print_index(t_stack *head)
+{
+    t_stack *current = head;
+    printf("Lista de ejemplo:\n");
+    while (current != NULL)
+    {
+        printf("  [Val: %d] [In: %d]\n", current->value, current->index); // Solo imprimimos el value por simplicidad
+        current = current->next;
+    }
+}
+/* ____________________________________________________________________________
+
+*/
 int	main(int argc, char *argv[])
 {	
 	t_stack *stack_a;
@@ -71,12 +111,7 @@ int	main(int argc, char *argv[])
 	char **input;
 	
 	input = arg_prep(argc, argv);
-	int i = 0;
-	while(i < 6)
-	{
-		printf("input: %s\n", input[i]);
-		i++;
-	}
+	print_list(stack_a);
 	stack_a = NULL;
 	fill_stack(&stack_a, input, argc);
 	stack_b = NULL;
@@ -86,13 +121,17 @@ int	main(int argc, char *argv[])
 	/***************************** OK ***********************************/
 
 	printf("size of stack a: %i\n", stack_size);
-	// Assign index in the stack A to know the smallest and bigger
-		//assign_index(/* & */stack_a);
-		//push_swap(&stack_a, &stack_b, stack_size);
+	print_list(stack_a);
+	set_index(stack_a);
+	print_index(stack_a);
+	push_swap(&stack_a, &stack_b, stack_size);
 	// free stack a
+	printf("AFTER_PS\n");
+	print_stack(stack_a);
+
 	free_input(input, argc);
 	free_stack(stack_a);
-	free(stack_b);
+	//free(stack_b);
 	return 0;
 }
 

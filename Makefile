@@ -17,7 +17,8 @@ SRC= push_swap.c \
 	stack_related.c \
 	swap.c \
 	rotate.c \
-	reverse_rotate.c
+	reverse_rotate.c \
+	sort.c
 
 
 OBJ = $(SRC:.c=.o)

@@ -39,3 +39,37 @@ void	append_node(t_stack **stack_a, int num)
 	new->next = NULL;
 	ft_lstaddback(stack_a, new);
 }
+
+void	init_index(t_stack *stack)
+{
+	t_stack *tmp;
+
+	tmp = stack;
+	while (tmp != NULL)
+	{
+		tmp->index = 1;
+		tmp = tmp->next;
+	}
+}
+void	set_index(t_stack *stack)
+{
+	t_stack *tmp;
+	t_stack *current;
+
+	init_index(stack);
+	tmp = stack;
+	current = stack;
+	while (current != NULL)
+	{
+		while (tmp != NULL)
+		{
+			if(current->value > tmp->value)
+			{
+				current->index++;
+			}
+			tmp = tmp->next;
+		}
+		tmp = stack;
+		current = current->next;
+	}
+}

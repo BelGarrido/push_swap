@@ -13,8 +13,8 @@ void	swap(t_stack **stack)
 	first->next = second->next;
 	second->next = first;
 	*stack = second;
-	printf("stack: %i\n", (*stack)->index);
-	printf("(*stack)->next: %i\n", (*stack)->next->index);
+	//printf("stack: %i\n", (*stack)->index);
+	//printf("(*stack)->next: %i\n", (*stack)->next->index);
 }
 
 void	sa(t_stack **stack_a)
