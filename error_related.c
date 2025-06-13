@@ -22,7 +22,6 @@ char **arg_prep(int argc, char **argv)
 {
 	char **result;
 	int i;
-	ft_putstr_fd("argprep\n", 1);
 	if (argc < 2 || ft_strlen(argv[1]) == 0) /*no segura de que funcione*/
 	{
 		ft_putstr_fd("Empty string\n", 1);

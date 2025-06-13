@@ -6,8 +6,6 @@ void	fill_stack(t_stack **stack_a, char **input, int argc)
 	int i;
 
 	i = 0;
-
-	printf("DEBUG: input[i] = %s\n", input[i]);
 	while(input[i] != NULL)
 	{
 		if (!valid_argument(input[i]))
@@ -20,7 +18,6 @@ void	fill_stack(t_stack **stack_a, char **input, int argc)
 			free_stack(*stack_a);
 			exit(1);
 		}
-		printf("num(atoi): %li\n", num);
 		if (repeat_num(num, stack_a))
 			error_manage(input, 2, stack_a, argc);
 		append_node(stack_a, num);
@@ -39,6 +36,8 @@ void	append_node(t_stack **stack_a, int num)
 	new->next = NULL;
 	ft_lstaddback(stack_a, new);
 }
+
+/* INDEX */
 
 void	init_index(t_stack *stack)
 {
@@ -71,5 +70,21 @@ void	set_index(t_stack *stack)
 		}
 		tmp = stack;
 		current = current->next;
+	}
+}
+/* POSITION */
+
+void	set_position(t_stack *stack)
+{
+	t_stack *tmp;
+	int i;
+
+	i = 0;
+	tmp = stack;
+	while (tmp != NULL)
+	{
+		i++;
+		tmp->position = i;
+		tmp = tmp->next;
 	}
 }

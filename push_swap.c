@@ -18,19 +18,9 @@ int	is_sorted(t_stack **stack)
 	return (1);
 }
 
-/****** push_swap() ********/
-// Check the stack A is sorted?
-	// YES - DONE 
-	// NO 
-	// if 2 values -> sa
-	// if 3 values -> sort_three()
-	// if > 3 values -> sort_algorithm()
-	
 void push_swap(t_stack **stack_a, t_stack **stack_b, int stack_a_size)
 {
 	printf("PUSH_SWAP\n");
-	printf("IS_SORTED: %i\n", is_sorted(stack_a));
-
 	if (stack_a_size == 2 && !is_sorted(stack_a))
 		sa(stack_a);
 	else if (stack_a_size == 3 && !is_sorted(stack_a))
@@ -43,23 +33,6 @@ void push_swap(t_stack **stack_a, t_stack **stack_b, int stack_a_size)
 	else
 		return ;
 }
-
-
-/****** sort_algorithm() ********/
-//{
-	// Pb everthing but 3 elements to stack B
-	// Sort_three() the remaining 3 elements in stack A
-	// While there's elements in stack B
-		// Calculate position: Find the position of numbers in A and B
-							// Find the target position in stack B
-		// Get the cheapest action
-		// Execute the sequence of actions
-	// Rotate stack A if needed
-//}
-
-/* ____________________________________________________________________________
-
-*/
 
 void print_stack(t_stack *stack)
 {
@@ -74,29 +47,18 @@ void print_stack(t_stack *stack)
     printf("Contenido del stack:\n");
     while (current) // Recorre la lista mientras el puntero no sea NULL
     {
-        printf("%d\n", current->value); // Imprime el valor del nodo actual
+        printf("  %d\n", current->value); // Imprime el valor del nodo actual
         current = current->next;        // Avanza al siguiente nodo
     }
 }
 
-void print_list(t_stack *head)
+void print_nodes(t_stack *head)
 {
     t_stack *current = head;
-    printf("Lista de ejemplo:\n");
+    printf("Stack:\n");
     while (current != NULL)
     {
-        printf("  [Value: %d]\n", current->value); // Solo imprimimos el value por simplicidad
-        current = current->next;
-    }
-}
-
-void print_index(t_stack *head)
-{
-    t_stack *current = head;
-    printf("Lista de ejemplo:\n");
-    while (current != NULL)
-    {
-        printf("  [Val: %d] [In: %d]\n", current->value, current->index); // Solo imprimimos el value por simplicidad
+        printf("  [Val: %d] [In: %d] [Ps: %d]\n", current->value, current->index, current->position);
         current = current->next;
     }
 }
@@ -111,24 +73,21 @@ int	main(int argc, char *argv[])
 	char **input;
 	
 	input = arg_prep(argc, argv);
-	print_list(stack_a);
 	stack_a = NULL;
 	fill_stack(&stack_a, input, argc);
 	stack_b = NULL;
 	print_stack(stack_a);
-	// Get size of the stack A
 	stack_size = get_size(stack_a);
-	/***************************** OK ***********************************/
 
 	printf("size of stack a: %i\n", stack_size);
-	print_list(stack_a);
 	set_index(stack_a);
-	print_index(stack_a);
+	print_nodes(stack_a);
+	set_position(stack_a);
+	print_nodes(stack_a);
+	/***************************** OK ***********************************/
 	push_swap(&stack_a, &stack_b, stack_size);
-	// free stack a
 	printf("AFTER_PS\n");
 	print_stack(stack_a);
-
 	free_input(input, argc);
 	free_stack(stack_a);
 	//free(stack_b);

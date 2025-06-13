@@ -5,6 +5,8 @@ void	rotate(t_stack **stack)
 	t_stack *tmp;
 	t_stack *tail;
 
+	if (!stack || !*stack || !(*stack)->next)
+		return ;
 	tmp = *stack;
 	tail = get_last(*stack);
     (*stack) = (*stack)->next;

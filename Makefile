@@ -12,12 +12,13 @@ NAME = push_swap
 
 SRC= push_swap.c \
 	list_utils.c \
-	function_utils.c \
+	utils.c \
 	error_related.c \
 	stack_related.c \
 	swap.c \
 	rotate.c \
 	reverse_rotate.c \
+	push.c \
 	sort.c
 
 

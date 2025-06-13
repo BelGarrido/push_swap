@@ -55,6 +55,8 @@ void	append_node(t_stack **stack_a, int num);
 void	fill_stack(t_stack **stack_a, char **input, int argc); /*int argc*/
 void	init_index(t_stack *stack);
 void	set_index(t_stack *stack);
+void	set_position(t_stack *stack);
+
 
 /* ERROR RELATED */
 int		repeat_num(int num, t_stack **stack);
