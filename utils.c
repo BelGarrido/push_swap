@@ -74,7 +74,50 @@ long	ft_atol(char *s)
 		number = number * 10 + s[i] - '0';
 		i++;
 	}
-	if (((neg == 1 && number > INT_MAX) || (neg == -1 && - number < INT_MIN)))
-			return (0);
 	return (number * neg);
+}
+
+int	get_mediana(t_stack *stack)
+{
+	int size;
+	int n;
+
+	size = get_size(stack);
+	if(size == 0)
+		return (0);
+	if (size % 2 != 0)
+	{
+		n = (size + 1) / 2;
+	}
+	else
+	{
+		n = size / 2;
+	}
+	return (n);
+}
+
+void	above_median(t_stack **stack, int size)
+{
+	int med_index;
+	t_stack *tmp;
+	
+	tmp = *stack;
+	med_index = get_mediana(*stack);
+	while(tmp != NULL)
+	{
+		if (tmp->index <= med_index)
+			tmp->below_med = 1;
+		else
+			tmp->below_med = 0;
+		tmp = tmp->next;
+	}
+	tmp = *stack;
+	while(tmp != NULL)
+	{
+		if (tmp->below_med == 0 && (size - tmp->index) < 3)
+			tmp->is_big = 1;
+		else
+			tmp->is_big = 0;
+		tmp = tmp->next;
+	}
 }

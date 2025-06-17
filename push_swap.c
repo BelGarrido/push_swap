@@ -62,6 +62,17 @@ void print_nodes(t_stack *head)
         current = current->next;
     }
 }
+
+void print_med(t_stack *head)
+{
+    t_stack *current = head;
+    printf("Stack:\n");
+    while (current != NULL)
+    {
+        printf("  [Val: %d] [In: %d] [MED: %d] [BIG: %d]\n", current->value, current->index, current->below_med, current->is_big);
+        current = current->next;
+    }
+}
 /* ____________________________________________________________________________
 
 */
@@ -76,16 +87,26 @@ int	main(int argc, char *argv[])
 	stack_a = NULL;
 	fill_stack(&stack_a, input, argc);
 	stack_b = NULL;
-	print_stack(stack_a);
+	print_nodes(stack_a);
 	stack_size = get_size(stack_a);
 
 	printf("size of stack a: %i\n", stack_size);
 	set_index(stack_a);
+	printf("set_index ----- stack_a: \n");
 	print_nodes(stack_a);
 	set_position(stack_a);
+	printf("set_position ----- stack_a: \n");
 	print_nodes(stack_a);
+
+	send_to_b(&stack_a, &stack_b, stack_size);
+	printf("send_to_b ----- stack_a: \n");
+	printf("stack_a: \n");
+	print_med(stack_a);
+	printf("stack_b: \n");
+	print_med(stack_b);
+
 	/***************************** OK ***********************************/
-	push_swap(&stack_a, &stack_b, stack_size);
+	//push_swap(&stack_a, &stack_b, stack_size);
 	printf("AFTER_PS\n");
 	print_stack(stack_a);
 	free_input(input, argc);

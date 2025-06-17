@@ -13,7 +13,7 @@ void	fill_stack(t_stack **stack_a, char **input, int argc)
 		num = ft_atol(input[i]);
 		if (((num > INT_MAX) || (num < INT_MIN)))
 		{
-			ft_putstr_fd("Incorrect argument type: number too high\n", 1);
+			ft_putstr_fd("Incorrect argument type: number too big\n", 1);
 			free_input(input, argc);
 			free_stack(*stack_a);
 			exit(1);
@@ -86,5 +86,33 @@ void	set_position(t_stack *stack)
 		i++;
 		tmp->position = i;
 		tmp = tmp->next;
+	}
+}
+
+void	send_to_b(t_stack **stack_a, t_stack **stack_b, int size)
+{
+	int dinamic_size;
+	int i;
+	
+	i = 0;
+	above_median(stack_a, size);
+	while(i < size)
+	{
+		if ((*stack_a)->below_med == 1)			
+			pb(stack_a, stack_b);
+		else
+			ra(stack_a);
+		i++;
+	}
+	dinamic_size = (get_size(*stack_a));
+	while(dinamic_size > 3)
+	{
+		if ((*stack_a)->is_big != 1)
+		{
+			pb(stack_a, stack_b);
+			dinamic_size--;
+		}
+		else
+			ra(stack_a);
 	}
 }
