@@ -15,9 +15,12 @@ typedef struct s_stack
 	int	value;
 	int index;
 	int position;
-	int target_position;
 	int	below_med;
 	int is_big;
+	int target_pos;
+	int cost_a;
+    int cost_b;
+    int total_cost;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 }	t_stack;
@@ -78,14 +81,28 @@ t_stack	*get_last(t_stack *lst);
 t_stack	*get_previous_last(t_stack *lst);
 int		get_size(t_stack *lst);
 void	ft_lstaddback(t_stack **lst, t_stack *new);
-void	above_median(t_stack **stack, int size);
-
+void	above_median(t_stack **stack);
+void	is_big(t_stack **stack, int size);
+int		ft_abs(int num);
+int		max_value(int one, int two);
 
 /* SORT */
 void	sort_three(t_stack **stack);
+void	sort_much(t_stack **stack_a, t_stack **stack_b, int size);
+void	set_target_pos(t_stack **stack_a, t_stack **stack_b);
+void	init_target_pos(t_stack *stack);
+int		find_min_index(t_stack *stack);
+void	calculate_costs(t_stack **stack_a, t_stack **stack_b);
+void	calculate_individual_costs(t_stack **stack_a, t_stack **stack_b);
+int		med_position(t_stack *stack);
+t_stack	*find_cheapest(t_stack *stack);
+void	execute_move(t_stack *stack);
+
+
 
 /* EXTRAS */
 void print_stack(t_stack *stack);
+void print_med(t_stack *head);
 
 
 #endif

@@ -27,8 +27,7 @@ void push_swap(t_stack **stack_a, t_stack **stack_b, int stack_a_size)
 		sort_three(stack_a);
 	else if (stack_a_size > 3 && !is_sorted(stack_a))
 	{
-		sort_three(stack_b);
-		//sort_algorithm(stack_a, stack_b);
+		sort_much(stack_a, stack_b, stack_a_size);
 	}
 	else
 		return ;
@@ -69,13 +68,17 @@ void print_med(t_stack *head)
     printf("Stack:\n");
     while (current != NULL)
     {
-        printf("  [Val: %d] [In: %d] [MED: %d] [BIG: %d]\n", current->value, current->index, current->below_med, current->is_big);
+        printf("  [Val: %d] [POS: %d] [In: %d] [MED: %d] [BIG: %d][TP: %d] [COST.A: %d] [COST.B: %d]\n", current->value, current->position, current->index, current->below_med, current->is_big, current->target_pos, current->cost_a, current->cost_b);
         current = current->next;
     }
 }
 /* ____________________________________________________________________________
 
 */
+
+
+/* ⚠️⚠️⚠️⚠️⚠️⚠️ NO FUNCIONA CON 4 Y 5 INPUTS ⚠️⚠️⚠️⚠️⚠️⚠️*/
+
 int	main(int argc, char *argv[])
 {	
 	t_stack *stack_a;
@@ -97,16 +100,16 @@ int	main(int argc, char *argv[])
 	set_position(stack_a);
 	printf("set_position ----- stack_a: \n");
 	print_nodes(stack_a);
-
-	send_to_b(&stack_a, &stack_b, stack_size);
-	printf("send_to_b ----- stack_a: \n");
+	//send_to_b(&stack_a, &stack_b, stack_size);
+	/***************************** OK ***********************************/
+	printf("\n");	
+	printf("PUSH_SWAP: \n");
+	push_swap(&stack_a, &stack_b, stack_size);
+	printf("\n");
 	printf("stack_a: \n");
 	print_med(stack_a);
 	printf("stack_b: \n");
 	print_med(stack_b);
-
-	/***************************** OK ***********************************/
-	//push_swap(&stack_a, &stack_b, stack_size);
 	printf("AFTER_PS\n");
 	print_stack(stack_a);
 	free_input(input, argc);

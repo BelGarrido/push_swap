@@ -76,6 +76,7 @@ void	set_index(t_stack *stack)
 
 void	set_position(t_stack *stack)
 {
+	printf("SET_POSITIONS: \n");
 	t_stack *tmp;
 	int i;
 
@@ -89,14 +90,16 @@ void	set_position(t_stack *stack)
 	}
 }
 
-void	send_to_b(t_stack **stack_a, t_stack **stack_b, int size)
+void	send_to_b(t_stack **stack_a, t_stack **stack_b, int size_b)
 {
 	int dinamic_size;
 	int i;
 	
 	i = 0;
-	above_median(stack_a, size);
-	while(i < size)
+	above_median(stack_a);
+	is_big(stack_a, size_b);
+
+	while(i < size_b)
 	{
 		if ((*stack_a)->below_med == 1)			
 			pb(stack_a, stack_b);

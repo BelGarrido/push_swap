@@ -96,7 +96,7 @@ int	get_mediana(t_stack *stack)
 	return (n);
 }
 
-void	above_median(t_stack **stack, int size)
+void	above_median(t_stack **stack)
 {
 	int med_index;
 	t_stack *tmp;
@@ -112,6 +112,14 @@ void	above_median(t_stack **stack, int size)
 		tmp = tmp->next;
 	}
 	tmp = *stack;
+
+}
+
+void	is_big(t_stack **stack, int size)
+{
+	t_stack *tmp;
+	
+	tmp = *stack;
 	while(tmp != NULL)
 	{
 		if (tmp->below_med == 0 && (size - tmp->index) < 3)
@@ -120,4 +128,20 @@ void	above_median(t_stack **stack, int size)
 			tmp->is_big = 0;
 		tmp = tmp->next;
 	}
+}
+
+int	ft_abs(int num)
+{
+	if (num < 0)
+		return (num * -1);
+	else
+		return (num);
+}
+
+int	max_value(int one, int two)
+{
+	if (one > two)
+		return (one);
+	else 
+		return(two);
 }
