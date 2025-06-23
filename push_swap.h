@@ -96,7 +96,10 @@ void	calculate_costs(t_stack **stack_a, t_stack **stack_b);
 void	calculate_individual_costs(t_stack **stack_a, t_stack **stack_b);
 int		med_position(t_stack *stack);
 t_stack	*find_cheapest(t_stack *stack);
-void	execute_move(t_stack *stack);
+void	execute_move(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b);
+int		med_position(t_stack *stack); // should go in UTILS
+t_stack	*find_min_node(t_stack *stack);
+
 
 
 

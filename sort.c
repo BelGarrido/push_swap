@@ -23,31 +23,73 @@ void	sort_three(t_stack **stack)
 void	sort_much(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	t_stack *cheapest;
+	t_stack *min_node;
 
-	printf("SORT_MUCH: send_to_b\n");
 	send_to_b(stack_a, stack_b, size);
+	printf("SORT_MUCH: send_to_b: stack A\n");
 	print_med(*stack_a);
+	printf("SORT_MUCH: send_to_b: stack B\n");
 	print_med(*stack_b);
-	printf("SORT_MUCH: sort_three\n");
 	sort_three(stack_a);
 	//For every element of B
-	printf("SORT_MUCH: before bucle del algoritmo\n");
-	int i = 0;
-	while (/* get_size(*stack_b) != 0 */ i < 7)
+	while (get_size(*stack_b) != 0)
 	{
-		//Calculate the number of actions (the cost) to put each element in stack B at its target position in stack A and choose the element that’s cheapest to move.
 		calculate_costs(stack_a, stack_b);
 		cheapest = find_cheapest(*stack_b);
 		printf("CHEAPEST_NODE: %i\n", cheapest->value);
-		//Execute the sequence of actions needed to move the element from stack B to stack A.
 		execute_move(cheapest, stack_a, stack_b);
-		i++;
+		printf("🌠🌠🌠STACK A AFTER MOVEEES🌠🌠🌠\n");
+		print_med(*stack_a);
 	}
+	printf("🦋ALL SORTED KINDO OF🦋\n");
+	//print_med(*stack_a);
+
 	//If stack A is not sorted, chose between ra and rra to rotate it into ascending order.
-	/* while(!is_sorted(stack_b))
+	printf("med_position: %i\n", med_position(*stack_a));
+	min_node = find_min_node(*stack_a);
+	printf("min node: %i\n", min_node->value);
+	set_position(*stack_a);	
+	if (min_node->position > med_position(*stack_a))
 	{
-		rrb(stack_b);
-	} */
+		while((*stack_a) ->index != 1)
+		{
+			printf("🦜🦜🦜🦜🦜🦜\n");
+			rra(stack_a);
+		}
+	}
+	else if (min_node->position < med_position(*stack_a))
+	{
+		while((*stack_a) ->index != 1)
+		{
+			printf("🪼🪼🪼🪼🪼🪼\n");
+			ra(stack_a);
+		}
+	}
+	printf("FINAL SORTED \n");
+	print_med(*stack_a);
+}
+
+t_stack	*find_min_node(t_stack *stack)
+{
+	int lower_index;
+	t_stack *tmp;
+	t_stack *min;
+ 	
+	if (!stack)
+        return NULL;
+	tmp = stack;
+	min = stack;
+	lower_index = tmp->index;
+	while (tmp != NULL)
+	{
+		if (tmp->index < lower_index)
+		{
+			lower_index = tmp->index;
+			min = tmp;
+		}
+		tmp = tmp->next;
+	}
+	return (min);
 }
 
 void	calculate_costs(t_stack **stack_a, t_stack **stack_b)
@@ -57,18 +99,17 @@ void	calculate_costs(t_stack **stack_a, t_stack **stack_b)
 	set_position(*stack_a);
 	set_position(*stack_b);
 	set_target_pos(stack_a, stack_b);
+	print_med(*stack_b);
 	calculate_individual_costs(stack_a, stack_b);
 }
 
 void	set_target_pos(t_stack **stack_a, t_stack **stack_b)
 {
-	printf("SET_TARGET_POS: \n");
 	int	best_index;
 	int	best_pos;
 	t_stack *a;
 	t_stack *b;
 
-	best_index = INT_MAX;
 	a = *stack_a;
 	b = *stack_b;
 	printf("SET_TARGET_POS: now b->tp should be -1\n");
@@ -77,8 +118,9 @@ void	set_target_pos(t_stack **stack_a, t_stack **stack_b)
 
 	while(b != NULL)
 	{
-		printf("SET_TARGET_POS: inside de loop \n");
-
+		best_index = INT_MAX;
+		best_pos = 0;
+		a = *stack_a;
 		while(a != NULL)
 		{
 			if (a->index > b->index && a->index < best_index)
@@ -90,20 +132,21 @@ void	set_target_pos(t_stack **stack_a, t_stack **stack_b)
 		}
 		if(best_index == INT_MAX)
 			best_pos = find_min_index(*stack_a);
-		b->target_pos = best_pos; 
+		b->target_pos = best_pos;
+		printf("tagert position of b (%i) %i\n", b->value, b->target_pos);
 		b = b->next;
-		a = *stack_a;
 	}
 	//b->target_pos = best_pos; //problemis
 	printf("SET_TARGET_POS: best_position = %i\n", best_pos);
+/* 	printf("SSET_TARGET_POS: stack A\n");
 	print_med(*stack_a);
-	print_med(*stack_b);
+	printf("SSET_TARGET_POS: stack B\n");
+	print_med(*stack_b); */
 }
 
 void	init_target_pos(t_stack *stack)
 {
 	t_stack *tmp;
-	printf("INTIT_TARGET_POSITION:\n");
 
 	tmp = stack;
 	while (tmp != NULL)
@@ -111,8 +154,6 @@ void	init_target_pos(t_stack *stack)
 		tmp->target_pos = -1;
 		tmp = tmp->next;
 	}
-	print_med(stack);
-
 }
 
 int	find_min_index(t_stack *stack)
@@ -137,7 +178,7 @@ int	find_min_index(t_stack *stack)
 
 void	calculate_individual_costs(t_stack **stack_a, t_stack **stack_b)
 {
-	printf("CALCULATE INDIVIDUAL COSTS\n");
+	printf("📈📈📈CALCULATE INDIVIDUAL COSTS📈📈📈\n");
 
 	t_stack *b;
 	int		med_a;
@@ -150,7 +191,6 @@ void	calculate_individual_costs(t_stack **stack_a, t_stack **stack_b)
 	med_a = med_position(*stack_a);
 	med_b = med_position(*stack_b);
 	b = *stack_b;
-
 	while(b != NULL)
 	{
 		if (b->position <= med_b)
@@ -171,6 +211,8 @@ int	med_position(t_stack *stack)
 	int size;
 
 	size = get_size(stack);
+	if(size == 0)
+		return (0);
 	med_pos = 0;
 	if (size % 2 == 0)
 	{
@@ -209,10 +251,155 @@ t_stack	*find_cheapest(t_stack *stack)
 	return (cheapest);
 }
 
-void	execute_move(t_stack *cheapest, t_stack *stack_a, t_stack *stack_b)
+void	cost_b_p(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b)
 {
-		printf("🎪 EXECUTE MOVE\n");
-		print_med(cheapest);
-		if (stack->cost_a == 0 && stack->cost_b == 0)
-			pa(&stack_a, stack_b);
+	if (cheapest->cost_a < 0)
+	{
+		while (cheapest->cost_a < 0)
+		{
+			rra(stack_a);
+			cheapest->cost_a++;
+		}
+		while (cheapest->cost_b > 0)
+		{
+			rb(stack_b);
+			cheapest->cost_b--;
+		}
+	}
+	else if (cheapest->cost_a > 0)
+	{
+		while (cheapest->cost_a > 0 && cheapest->cost_b > 0)
+		{
+			rr(stack_a, stack_b);
+			cheapest->cost_a--;
+			cheapest->cost_b--;
+		}
+		if (cheapest->cost_a != 0)
+		{
+			while(cheapest->cost_a > 0)
+			{
+				ra(stack_a);
+			}
+		}	
+		else if (cheapest->cost_b != 0)
+		{
+			while(cheapest->cost_b > 0)
+			{
+				rb(stack_b);
+			}
+		}
+	}
+	else
+	{
+		while (cheapest->cost_b > 0)
+		{
+			rb(stack_b);
+			cheapest->cost_b--;
+		}
+	}
+}
+
+void	cost_b_n(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b)
+{
+	if (cheapest->cost_a > 0)
+	{
+		while (cheapest->cost_a > 0)
+		{
+			ra(stack_a);
+			cheapest->cost_a--;
+		}
+		while (cheapest->cost_b < 0)
+		{
+			rrb(stack_b);
+			cheapest->cost_b++;
+		}
+	}
+	else if (cheapest->cost_a < 0)
+	{
+		while (cheapest->cost_a < 0 && cheapest->cost_b < 0)
+		{
+			rrr(stack_a, stack_b);
+			cheapest->cost_a++;
+			cheapest->cost_b++;
+		}
+		if (cheapest->cost_a != 0)
+		{	
+			while (cheapest->cost_a < 0)
+			{
+				rra(stack_a);
+				cheapest->cost_a++;
+			}
+			//bucle inecesario
+			while (cheapest->cost_a > 0)
+			{
+				ra(stack_a);
+				cheapest->cost_a--;
+			}
+		}
+		else if (cheapest->cost_b != 0)
+		{		
+			while (cheapest->cost_b < 0)
+			{
+				rrb(stack_b);
+				cheapest->cost_b++;
+			}
+			//bucle innecesario
+			while (cheapest->cost_b > 0)
+			{
+				rb(stack_b);
+				cheapest->cost_b--;
+			}
+		}
+	}
+	else
+	{
+		while (cheapest->cost_b < 0)
+		{
+			rrb(stack_b);
+			cheapest->cost_b++;
+		}
+	}
+}
+
+void	cost_b_0(t_stack *cheapest, t_stack **stack_a)
+{
+	if (cheapest->cost_a < 0)
+	{
+		while (cheapest->cost_a < 0)
+		{
+			rra(stack_a);
+			cheapest->cost_a++;
+		}
+	}
+	else if (cheapest->cost_a > 0)
+	{
+		while (cheapest->cost_a > 0)
+		{
+			ra(stack_a);
+			cheapest->cost_a--;
+		}
+	}
+}
+
+void	execute_move(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b)
+{
+		printf("🎪🎪🎪 EXECUTE MOVE: stack B 🎪🎪🎪\n");
+		//print_med(*stack_b);
+		printf("cheapest value: %i\n", cheapest->value);
+		if(cheapest->cost_b == 0)
+		{
+			printf("🎪b0\n");
+			cost_b_0(cheapest, stack_a);
+		}
+		else if (cheapest->cost_b < 0)
+		{
+			printf("🎪bn\n");
+			cost_b_n(cheapest, stack_a, stack_b);
+		}
+		else
+		{
+			printf("🎪bp\n");
+			cost_b_p(cheapest, stack_a, stack_b);
+		}
+		pa(stack_a, stack_b);
 }

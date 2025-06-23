@@ -76,7 +76,6 @@ void	set_index(t_stack *stack)
 
 void	set_position(t_stack *stack)
 {
-	printf("SET_POSITIONS: \n");
 	t_stack *tmp;
 	int i;
 

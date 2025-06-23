@@ -77,7 +77,7 @@ long	ft_atol(char *s)
 	return (number * neg);
 }
 
-int	get_mediana(t_stack *stack)
+/* int	get_mediana(t_stack *stack)
 {
 	int size;
 	int n;
@@ -94,7 +94,7 @@ int	get_mediana(t_stack *stack)
 		n = size / 2;
 	}
 	return (n);
-}
+} */
 
 void	above_median(t_stack **stack)
 {
@@ -102,7 +102,7 @@ void	above_median(t_stack **stack)
 	t_stack *tmp;
 	
 	tmp = *stack;
-	med_index = get_mediana(*stack);
+	med_index = med_position(*stack);
 	while(tmp != NULL)
 	{
 		if (tmp->index <= med_index)
