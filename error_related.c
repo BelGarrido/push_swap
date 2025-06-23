@@ -128,7 +128,7 @@ void	free_input(char **input, int argc)
 		printf("free_input\n");
 		while(input[i] != NULL)
 		{
-			printf("free_input_X\n");
+			//printf("free_input_X\n");
 			free(input[i]);
 			i++;
 		}

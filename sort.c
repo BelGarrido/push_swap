@@ -279,6 +279,7 @@ void	cost_b_p(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b)
 			while(cheapest->cost_a > 0)
 			{
 				ra(stack_a);
+				cheapest->cost_a--;
 			}
 		}	
 		else if (cheapest->cost_b != 0)
@@ -286,6 +287,7 @@ void	cost_b_p(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b)
 			while(cheapest->cost_b > 0)
 			{
 				rb(stack_b);
+				cheapest->cost_b--;
 			}
 		}
 	}
