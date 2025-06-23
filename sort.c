@@ -26,9 +26,9 @@ void	sort_much(t_stack **stack_a, t_stack **stack_b, int size)
 	t_stack *min_node;
 
 	send_to_b(stack_a, stack_b, size);
-	printf("SORT_MUCH: send_to_b: stack A\n");
+	//printf("SORT_MUCH: send_to_b: stack A\n");
 	print_med(*stack_a);
-	printf("SORT_MUCH: send_to_b: stack B\n");
+	//printf("SORT_MUCH: send_to_b: stack B\n");
 	print_med(*stack_b);
 	sort_three(stack_a);
 	//For every element of B
@@ -36,24 +36,24 @@ void	sort_much(t_stack **stack_a, t_stack **stack_b, int size)
 	{
 		calculate_costs(stack_a, stack_b);
 		cheapest = find_cheapest(*stack_b);
-		printf("CHEAPEST_NODE: %i\n", cheapest->value);
+		//printf("CHEAPEST_NODE: %i\n", cheapest->value);
 		execute_move(cheapest, stack_a, stack_b);
-		printf("🌠🌠🌠STACK A AFTER MOVEEES🌠🌠🌠\n");
+		//printf("🌠🌠🌠STACK A AFTER MOVEEES🌠🌠🌠\n");
 		print_med(*stack_a);
 	}
-	printf("🦋ALL SORTED KINDO OF🦋\n");
+	//printf("🦋ALL SORTED KINDO OF🦋\n");
 	//print_med(*stack_a);
 
 	//If stack A is not sorted, chose between ra and rra to rotate it into ascending order.
-	printf("med_position: %i\n", med_position(*stack_a));
+	//printf("med_position: %i\n", med_position(*stack_a));
 	min_node = find_min_node(*stack_a);
-	printf("min node: %i\n", min_node->value);
+	//printf("min node: %i\n", min_node->value);
 	set_position(*stack_a);	
 	if (min_node->position > med_position(*stack_a))
 	{
 		while((*stack_a) ->index != 1)
 		{
-			printf("🦜🦜🦜🦜🦜🦜\n");
+			//printf("🦜🦜🦜🦜🦜🦜\n");
 			rra(stack_a);
 		}
 	}
@@ -61,11 +61,11 @@ void	sort_much(t_stack **stack_a, t_stack **stack_b, int size)
 	{
 		while((*stack_a) ->index != 1)
 		{
-			printf("🪼🪼🪼🪼🪼🪼\n");
+			//printf("🪼🪼🪼🪼🪼🪼\n");
 			ra(stack_a);
 		}
 	}
-	printf("FINAL SORTED \n");
+	//printf("FINAL SORTED \n");
 	print_med(*stack_a);
 }
 
@@ -94,7 +94,7 @@ t_stack	*find_min_node(t_stack *stack)
 
 void	calculate_costs(t_stack **stack_a, t_stack **stack_b)
 {
-	printf("CALCULATE_COSTS: \n");
+	//printf("CALCULATE_COSTS: \n");
 	//Find the current position of every element in stack A and B.
 	set_position(*stack_a);
 	set_position(*stack_b);
@@ -112,7 +112,7 @@ void	set_target_pos(t_stack **stack_a, t_stack **stack_b)
 
 	a = *stack_a;
 	b = *stack_b;
-	printf("SET_TARGET_POS: now b->tp should be -1\n");
+	//printf("SET_TARGET_POS: now b->tp should be -1\n");
 	init_target_pos(*stack_b); //now all of them are -1; no FUNCIONAAAAA
 	print_med(*stack_b);
 
@@ -133,14 +133,14 @@ void	set_target_pos(t_stack **stack_a, t_stack **stack_b)
 		if(best_index == INT_MAX)
 			best_pos = find_min_index(*stack_a);
 		b->target_pos = best_pos;
-		printf("tagert position of b (%i) %i\n", b->value, b->target_pos);
+		//printf("tagert position of b (%i) %i\n", b->value, b->target_pos);
 		b = b->next;
 	}
 	//b->target_pos = best_pos; //problemis
-	printf("SET_TARGET_POS: best_position = %i\n", best_pos);
-/* 	printf("SSET_TARGET_POS: stack A\n");
+	//printf("SET_TARGET_POS: best_position = %i\n", best_pos);
+/* 	//printf("SSET_TARGET_POS: stack A\n");
 	print_med(*stack_a);
-	printf("SSET_TARGET_POS: stack B\n");
+	//printf("SSET_TARGET_POS: stack B\n");
 	print_med(*stack_b); */
 }
 
@@ -178,7 +178,7 @@ int	find_min_index(t_stack *stack)
 
 void	calculate_individual_costs(t_stack **stack_a, t_stack **stack_b)
 {
-	printf("📈📈📈CALCULATE INDIVIDUAL COSTS📈📈📈\n");
+	//printf("📈📈📈CALCULATE INDIVIDUAL COSTS📈📈📈\n");
 
 	t_stack *b;
 	int		med_a;
@@ -385,22 +385,22 @@ void	cost_b_0(t_stack *cheapest, t_stack **stack_a)
 
 void	execute_move(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b)
 {
-		printf("🎪🎪🎪 EXECUTE MOVE: stack B 🎪🎪🎪\n");
+		////printf("🎪🎪🎪 EXECUTE MOVE: stack B 🎪🎪🎪\n");
 		//print_med(*stack_b);
-		printf("cheapest value: %i\n", cheapest->value);
+		//printf("cheapest value: %i\n", cheapest->value);
 		if(cheapest->cost_b == 0)
 		{
-			printf("🎪b0\n");
+			//printf("🎪b0\n");
 			cost_b_0(cheapest, stack_a);
 		}
 		else if (cheapest->cost_b < 0)
 		{
-			printf("🎪bn\n");
+			//printf("🎪bn\n");
 			cost_b_n(cheapest, stack_a, stack_b);
 		}
 		else
 		{
-			printf("🎪bp\n");
+			//printf("🎪bp\n");
 			cost_b_p(cheapest, stack_a, stack_b);
 		}
 		pa(stack_a, stack_b);

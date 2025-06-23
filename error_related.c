@@ -125,10 +125,10 @@ void	free_input(char **input, int argc)
 	i = 0;
 	if(argc == 2)
 	{
-		printf("free_input\n");
+		//printf("free_input\n");
 		while(input[i] != NULL)
 		{
-			//printf("free_input_X\n");
+			////printf("free_input_X\n");
 			free(input[i]);
 			i++;
 		}
