@@ -1,20 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   swap.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/24 10:10:40 by anagarri@st       #+#    #+#             */
+/*   Updated: 2025/06/24 10:11:30 by anagarri@st      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	swap(t_stack **stack)
 {
-	t_stack *first;
-	t_stack *second;
+	t_stack	*first;
+	t_stack	*second;
 
 	if (!stack || !*stack || !(*stack)->next)
-		return;
-
+		return ;
 	first = *stack;
 	second = (*stack)->next;
 	first->next = second->next;
 	second->next = first;
 	*stack = second;
-	//printf("stack: %i\n", (*stack)->index);
-	//printf("(*stack)->next: %i\n", (*stack)->next->index);
 }
 
 void	sa(t_stack **stack_a)
