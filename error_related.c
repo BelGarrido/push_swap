@@ -81,7 +81,7 @@ int	repeat_num(int num, t_stack **stack)
 	ft_putstr_fd("Empty string\n", 1);
 	exit(1);
 } */
-void	error_manage(char **input, int type, t_stack **stack, int argc) /*t_stack **stack,*/
+void	error_manage(char **input, int type, t_stack **stack, int argc)
 {
 	if (type == 1)
 	{
@@ -91,11 +91,6 @@ void	error_manage(char **input, int type, t_stack **stack, int argc) /*t_stack *
 	{
 		ft_putstr_fd("Argument repeated\n", 1);
 	}
-	else if (type == 3)
-	{
-		ft_putstr_fd("Incorrect argument type\n", 1);
-	}
-	//free_stack(stack); NECESARIO?
 	free_input(input, argc);
 	free_stack(*stack);
 	exit(1);

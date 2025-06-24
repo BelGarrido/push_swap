@@ -27,9 +27,9 @@ void	sort_much(t_stack **stack_a, t_stack **stack_b, int size)
 
 	send_to_b(stack_a, stack_b, size);
 	//printf("SORT_MUCH: send_to_b: stack A\n");
-	print_med(*stack_a);
+	//print_med(*stack_a);
 	//printf("SORT_MUCH: send_to_b: stack B\n");
-	print_med(*stack_b);
+	//print_med(*stack_b);
 	sort_three(stack_a);
 	//For every element of B
 	while (get_size(*stack_b) != 0)
@@ -39,7 +39,7 @@ void	sort_much(t_stack **stack_a, t_stack **stack_b, int size)
 		//printf("CHEAPEST_NODE: %i\n", cheapest->value);
 		execute_move(cheapest, stack_a, stack_b);
 		//printf("🌠🌠🌠STACK A AFTER MOVEEES🌠🌠🌠\n");
-		print_med(*stack_a);
+		//print_med(*stack_a);
 	}
 	//printf("🦋ALL SORTED KINDO OF🦋\n");
 	//print_med(*stack_a);
@@ -66,7 +66,7 @@ void	sort_much(t_stack **stack_a, t_stack **stack_b, int size)
 		}
 	}
 	//printf("FINAL SORTED \n");
-	print_med(*stack_a);
+	//print_med(*stack_a);
 }
 
 t_stack	*find_min_node(t_stack *stack)
@@ -99,7 +99,7 @@ void	calculate_costs(t_stack **stack_a, t_stack **stack_b)
 	set_position(*stack_a);
 	set_position(*stack_b);
 	set_target_pos(stack_a, stack_b);
-	print_med(*stack_b);
+	//print_med(*stack_b);
 	calculate_individual_costs(stack_a, stack_b);
 }
 
@@ -114,7 +114,7 @@ void	set_target_pos(t_stack **stack_a, t_stack **stack_b)
 	b = *stack_b;
 	//printf("SET_TARGET_POS: now b->tp should be -1\n");
 	init_target_pos(*stack_b); //now all of them are -1; no FUNCIONAAAAA
-	print_med(*stack_b);
+	//print_med(*stack_b);
 
 	while(b != NULL)
 	{
