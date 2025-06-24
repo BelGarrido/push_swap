@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/24 10:13:53 by anagarri@st       #+#    #+#             */
+/*   Updated: 2025/06/24 10:14:34 by anagarri@st      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void reverse_rotate(t_stack **stack)
+void	reverse_rotate(t_stack **stack)
 {
-	t_stack *tmp;
-	t_stack *tail;
-	t_stack *new_tail;
+	t_stack	*tmp;
+	t_stack	*tail;
+	t_stack	*new_tail;
 
 	tmp = (*stack);
 	tail = get_last(*stack);
@@ -13,6 +25,7 @@ void reverse_rotate(t_stack **stack)
 	(*stack)->next = tmp;
 	new_tail->next = NULL;
 }
+
 void	rra(t_stack **stack_a)
 {
 	reverse_rotate(stack_a);
