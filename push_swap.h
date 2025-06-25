@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/25 10:56:04 by anagarri@st       #+#    #+#             */
+/*   Updated: 2025/06/25 11:02:27 by anagarri@st      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -7,27 +19,26 @@
 # include <fcntl.h>  // flags open
 # include <stdio.h> // printf
 # include <limits.h> // INT_MAX & MIN
-#include "libft/libft.h"
-//#include "libft.h"	// library
+# include "libft/libft.h"
 
 typedef struct s_stack
 {
-	int	value;
-	int index;
-	int position;
-	int	below_med;
-	int is_big;
-	int target_pos;
-	int cost_a;
-    int cost_b;
-    int total_cost;
+	int				value;
+	int				index;
+	int				position;
+	int				below_med;
+	int				is_big;
+	int				target_pos;
+	int				cost_a;
+	int				cost_b;
+	int				total_cost;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 }	t_stack;
 
 //specific functions
 
-int 	ft_valid_arguments(int argc, char *argv[]);
+int		ft_valid_arguments(int argc, char *argv[]);
 int		ft_is_valid_number(char *argument);
 void	ft_putstr_fd(char *s, int fd);
 
@@ -70,7 +81,8 @@ void	send_to_b(t_stack **stack_a, t_stack **stack_b, int size);
 int		repeat_num(int num, t_stack **stack);
 int		valid_argument(char *arg);
 char	**arg_prep(int argc, char **argv);
-void	error_manage(char **input, int type, t_stack **stack, int argc); /*t_stack **stack,*/
+void	error_manage(char **input, int type,
+			t_stack **stack, int argc); /*t_stack **stack,*/
 void	free_input(char **input, int argc);
 void	free_stack(t_stack *stack_a);
 
@@ -99,13 +111,5 @@ t_stack	*find_cheapest(t_stack *stack);
 void	execute_move(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b);
 int		med_position(t_stack *stack); // should go in UTILS
 t_stack	*find_min_node(t_stack *stack);
-
-
-
-
-/* EXTRAS */
-void print_stack(t_stack *stack);
-void print_med(t_stack *head);
-
 
 #endif
