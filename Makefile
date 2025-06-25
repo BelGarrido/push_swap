@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/06/25 11:26:48 by anagarri@st       #+#    #+#              #
+#    Updated: 2025/06/25 11:26:51 by anagarri@st      ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Path to ft_printf
 LIBFT_DIR = libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
@@ -11,7 +23,6 @@ CFLAGS = -Wall -Werror -Wextra -g
 NAME = push_swap
 
 SRC= push_swap.c \
-	list_utils.c \
 	utils.c \
 	error_related.c \
 	stack_related.c \
@@ -21,12 +32,10 @@ SRC= push_swap.c \
 	push.c \
 	sort.c
 
-
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-# Server build rule
 $(NAME): $(OBJ) $(LIBFT_LIB)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_LIB) -o $(NAME)
 
