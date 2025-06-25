@@ -6,7 +6,7 @@
 #    By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/25 11:26:48 by anagarri@st       #+#    #+#              #
-#    Updated: 2025/06/25 11:26:51 by anagarri@st      ###   ########.fr        #
+#    Updated: 2025/06/25 11:44:32 by anagarri@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC= push_swap.c \
 	rotate.c \
 	reverse_rotate.c \
 	push.c \
-	sort.c
+	sort.c \
+	free.c
 
 OBJ = $(SRC:.c=.o)
 

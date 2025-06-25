@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:56:04 by anagarri@st       #+#    #+#             */
-/*   Updated: 2025/06/25 11:02:27 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/06/25 11:45:05 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ int		valid_argument(char *arg);
 char	**arg_prep(int argc, char **argv);
 void	error_manage(char **input, int type,
 			t_stack **stack, int argc); /*t_stack **stack,*/
-void	free_input(char **input, int argc);
-void	free_stack(t_stack *stack_a);
 
 /* FUNCTION_UTILS */
 long	ft_atol(char *s);
@@ -111,5 +109,9 @@ t_stack	*find_cheapest(t_stack *stack);
 void	execute_move(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b);
 int		med_position(t_stack *stack); // should go in UTILS
 t_stack	*find_min_node(t_stack *stack);
+
+/* FREE */
+void	free_input(char **input, int argc);
+void	free_stack(t_stack *stack_a);
 
 #endif

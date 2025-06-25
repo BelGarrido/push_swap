@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:28:23 by anagarri@st       #+#    #+#             */
-/*   Updated: 2025/06/25 11:34:08 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/06/25 11:46:14 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,37 +84,4 @@ void	error_manage(char **input, int type, t_stack **stack, int argc)
 	free_input(input, argc);
 	free_stack(*stack);
 	exit(1);
-}
-
-void	free_stack(t_stack *stack)
-{
-	t_stack	*tmp;
-	t_stack	*del;
-
-	if (stack == NULL)
-		return ;
-	tmp = stack;
-	del = NULL;
-	while (tmp != NULL)
-	{
-		del = tmp;
-		tmp = tmp->next;
-		free(del);
-	}
-}
-
-void	free_input(char **input, int argc)
-{
-	int	i;
-
-	i = 0;
-	if (argc == 2)
-	{
-		while (input[i] != NULL)
-		{
-			free(input[i]);
-			i++;
-		}
-	}
-	free(input);
 }
