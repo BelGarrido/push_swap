@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:11:20 by anagarri@st       #+#    #+#             */
-/*   Updated: 2025/06/25 11:24:43 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/06/25 12:11:07 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,18 +120,6 @@ void	set_target_pos(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
-void	init_target_pos(t_stack *stack)
-{
-	t_stack	*tmp;
-
-	tmp = stack;
-	while (tmp != NULL)
-	{
-		tmp->target_pos = -1;
-		tmp = tmp->next;
-	}
-}
-
 int	find_min_index(t_stack *stack)
 {
 	int		lower_pos;
@@ -177,22 +165,6 @@ void	calculate_individual_costs(t_stack **stack_a, t_stack **stack_b)
 			b->cost_a = (size_a - (b->target_pos - 1)) * -1;
 		b = b->next;
 	}
-}
-
-int	med_position(t_stack *stack)
-{
-	int	med_pos;
-	int	size;
-
-	size = get_size(stack);
-	if (size == 0)
-		return (0);
-	med_pos = 0;
-	if (size % 2 == 0)
-		med_pos = size / 2;
-	else if (size % 2 != 0)
-		med_pos = (size + 1) / 2;
-	return (med_pos);
 }
 
 t_stack	*find_cheapest(t_stack *stack)

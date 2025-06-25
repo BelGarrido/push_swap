@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:56:04 by anagarri@st       #+#    #+#             */
-/*   Updated: 2025/06/25 11:45:05 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/06/25 12:15:37 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,13 @@ void	push_swap(t_stack **stack_a, t_stack **stack_b, int stack_a_size);
 /* STACK RELATED */
 void	append_node(t_stack **stack_a, int num);
 void	fill_stack(t_stack **stack_a, char **input, int argc); /*int argc*/
+void	send_to_b(t_stack **stack_a, t_stack **stack_b, int size);
+
+/* STACK RELATED 2 */
 void	init_index(t_stack *stack);
 void	set_index(t_stack *stack);
 void	set_position(t_stack *stack);
-void	send_to_b(t_stack **stack_a, t_stack **stack_b, int size);
+void	init_target_pos(t_stack *stack);
 
 /* ERROR RELATED */
 int		repeat_num(int num, t_stack **stack);
@@ -84,30 +87,29 @@ char	**arg_prep(int argc, char **argv);
 void	error_manage(char **input, int type,
 			t_stack **stack, int argc); /*t_stack **stack,*/
 
-/* FUNCTION_UTILS */
+/* UTILS */
 long	ft_atol(char *s);
-int		get_mediana(t_stack *stack);
 t_stack	*get_last(t_stack *lst);
 t_stack	*get_previous_last(t_stack *lst);
-int		get_size(t_stack *lst);
 void	ft_lstaddback(t_stack **lst, t_stack *new);
+int		ft_abs(int num);
+
+/* UTILS 2 */
 void	above_median(t_stack **stack);
 void	is_big(t_stack **stack, int size);
-int		ft_abs(int num);
+int		med_position(t_stack *stack);
+int		get_size(t_stack *lst);
 int		max_value(int one, int two);
 
 /* SORT */
 void	sort_three(t_stack **stack);
 void	sort_much(t_stack **stack_a, t_stack **stack_b, int size);
 void	set_target_pos(t_stack **stack_a, t_stack **stack_b);
-void	init_target_pos(t_stack *stack);
 int		find_min_index(t_stack *stack);
 void	calculate_costs(t_stack **stack_a, t_stack **stack_b);
 void	calculate_individual_costs(t_stack **stack_a, t_stack **stack_b);
-int		med_position(t_stack *stack);
 t_stack	*find_cheapest(t_stack *stack);
 void	execute_move(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b);
-int		med_position(t_stack *stack); // should go in UTILS
 t_stack	*find_min_node(t_stack *stack);
 
 /* FREE */

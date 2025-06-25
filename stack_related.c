@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_related.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/25 11:58:07 by anagarri@st       #+#    #+#             */
+/*   Updated: 2025/06/25 12:01:41 by anagarri@st      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	fill_stack(t_stack **stack_a, char **input, int argc)
 {
-	long num;
-	int i;
+	long	num;
+	int		i;
 
 	i = 0;
-	while(input[i] != NULL)
+	while (input[i] != NULL)
 	{
 		if (!valid_argument(input[i]))
 			error_manage(input, 1, stack_a, argc);
@@ -27,87 +39,34 @@ void	fill_stack(t_stack **stack_a, char **input, int argc)
 
 void	append_node(t_stack **stack_a, int num)
 {
-	t_stack *new;
+	t_stack	*new;
 
 	new = malloc(sizeof(t_stack));
-	if(!new)
-		return;
+	if (!new)
+		return ;
 	new->value = num;
 	new->next = NULL;
 	ft_lstaddback(stack_a, new);
 }
 
-/* INDEX */
-
-void	init_index(t_stack *stack)
-{
-	t_stack *tmp;
-
-	tmp = stack;
-	while (tmp != NULL)
-	{
-		tmp->index = 1;
-		tmp = tmp->next;
-	}
-}
-void	set_index(t_stack *stack)
-{
-	t_stack *tmp;
-	t_stack *current;
-
-	init_index(stack);
-	tmp = stack;
-	current = stack;
-	while (current != NULL)
-	{
-		while (tmp != NULL)
-		{
-			if(current->value > tmp->value)
-			{
-				current->index++;
-			}
-			tmp = tmp->next;
-		}
-		tmp = stack;
-		current = current->next;
-	}
-}
-/* POSITION */
-
-void	set_position(t_stack *stack)
-{
-	t_stack *tmp;
-	int i;
-
-	i = 0;
-	tmp = stack;
-	while (tmp != NULL)
-	{
-		i++;
-		tmp->position = i;
-		tmp = tmp->next;
-	}
-}
-
 void	send_to_b(t_stack **stack_a, t_stack **stack_b, int size_b)
 {
-	int dinamic_size;
-	int i;
-	
+	int	dinamic_size;
+	int	i;
+
 	i = 0;
 	above_median(stack_a);
 	is_big(stack_a, size_b);
-
-	while(i < size_b)
+	while (i < size_b)
 	{
-		if ((*stack_a)->below_med == 1)			
+		if ((*stack_a)->below_med == 1)
 			pb(stack_a, stack_b);
 		else
 			ra(stack_a);
 		i++;
 	}
 	dinamic_size = (get_size(*stack_a));
-	while(dinamic_size > 3)
+	while (dinamic_size > 3)
 	{
 		if ((*stack_a)->is_big != 1)
 		{

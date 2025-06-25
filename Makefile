@@ -6,7 +6,7 @@
 #    By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/25 11:26:48 by anagarri@st       #+#    #+#              #
-#    Updated: 2025/06/25 11:44:32 by anagarri@st      ###   ########.fr        #
+#    Updated: 2025/06/25 12:16:30 by anagarri@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,10 @@ NAME = push_swap
 
 SRC= push_swap.c \
 	utils.c \
+	utils2.c \
 	error_related.c \
 	stack_related.c \
+	stack_related2.c \
 	swap.c \
 	rotate.c \
 	reverse_rotate.c \
