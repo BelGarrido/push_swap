@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 10:56:04 by anagarri@st       #+#    #+#             */
-/*   Updated: 2025/06/25 12:15:37 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/07/15 13:06:50 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,16 @@ void	sort_three(t_stack **stack);
 void	sort_much(t_stack **stack_a, t_stack **stack_b, int size);
 void	set_target_pos(t_stack **stack_a, t_stack **stack_b);
 int		find_min_index(t_stack *stack);
-void	calculate_costs(t_stack **stack_a, t_stack **stack_b);
 void	calculate_individual_costs(t_stack **stack_a, t_stack **stack_b);
-t_stack	*find_cheapest(t_stack *stack);
 void	execute_move(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b);
 t_stack	*find_min_node(t_stack *stack);
+
+/* COSTS_UTILS */
+void	cost_b_p(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b);
+void	cost_b_n(t_stack *cheapest, t_stack **stack_a, t_stack **stack_b);
+void	cost_b_0(t_stack *cheapest, t_stack **stack_a);
+void	calculate_costs(t_stack **stack_a, t_stack **stack_b);
+t_stack	*find_cheapest(t_stack *stack);
 
 /* FREE */
 void	free_input(char **input, int argc);

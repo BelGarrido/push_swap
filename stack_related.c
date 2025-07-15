@@ -6,7 +6,7 @@
 /*   By: anagarri@student.42malaga.com <anagarri    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 11:58:07 by anagarri@st       #+#    #+#             */
-/*   Updated: 2025/06/25 12:01:41 by anagarri@st      ###   ########.fr       */
+/*   Updated: 2025/07/15 12:11:40 by anagarri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,47 @@ void	send_to_b(t_stack **stack_a, t_stack **stack_b, int size_b)
 		else
 			ra(stack_a);
 	}
+}
+
+t_stack	*find_min_node(t_stack *stack)
+{
+	int		lower_index;
+	t_stack	*tmp;
+	t_stack	*min;
+
+	if (!stack)
+		return (NULL);
+	tmp = stack;
+	min = stack;
+	lower_index = tmp->index;
+	while (tmp != NULL)
+	{
+		if (tmp->index < lower_index)
+		{
+			lower_index = tmp->index;
+			min = tmp;
+		}
+		tmp = tmp->next;
+	}
+	return (min);
+}
+
+int	find_min_index(t_stack *stack)
+{
+	int		lower_pos;
+	int		lower_index;
+	t_stack	*tmp;
+
+	tmp = stack;
+	lower_index = tmp->index;
+	while (tmp != NULL)
+	{
+		if (tmp->index < lower_index)
+		{
+			lower_index = tmp->index;
+			lower_pos = tmp->position;
+		}
+		tmp = tmp->next;
+	}
+	return (lower_pos);
 }
